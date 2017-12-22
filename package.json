@@ -1,0 +1,23 @@
+{
+  "name": "simple-json-validate",
+  "version": "1.0.0",
+  "description": "tool for validate json input",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freeweed/simple-json-validate.git"
+  },
+  "keywords": [
+    "json",
+    "validate"
+  ],
+  "author": "freeweed",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/freeweed/simple-json-validate/issues"
+  },
+  "homepage": "https://github.com/freeweed/simple-json-validate#readme"
+}
