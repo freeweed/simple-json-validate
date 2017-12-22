@@ -63,6 +63,13 @@ const validate = require('simple-json-validate');
     NOTE: input can be only JSON Object
 ```
 
+### 4. Check Your Input Is Valid Or Not 
+```js
+   if(output.isValid){
+       //awesome code here
+   }
+```
+
 ## The Format
 
 You can use multiple format with | between format such as 
