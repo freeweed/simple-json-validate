@@ -1,4 +1,5 @@
-#SIMPLE-JSON-VALIDATE
+##SIMPLE-JSON-VALIDATE
+
 tool for check json input and set json data
 
 ## Getting Started
@@ -48,7 +49,9 @@ const validate = require('simple-json-validate');
   }
   new validate(pattern);
 ```
+
 ### 3. Call Check Function
+
 ```js
    let output = validated.check("pattern name", input)
 ```
@@ -58,7 +61,9 @@ const validate = require('simple-json-validate');
 ```
 
 ##The Format
+
 You can use multiple format with | between format such as 
+
 ```
 "id": required|number|max_length[13]|min_length[13]
 ```
