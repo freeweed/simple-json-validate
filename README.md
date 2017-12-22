@@ -1,4 +1,4 @@
-##SIMPLE-JSON-VALIDATE
+# SIMPLE-JSON-VALIDATE
 
 tool for check json input and set json data
 
@@ -60,7 +60,7 @@ const validate = require('simple-json-validate');
     NOTE: input can be only JSON Object
 ```
 
-##The Format
+## The Format
 
 You can use multiple format with | between format such as 
 
@@ -68,7 +68,7 @@ You can use multiple format with | between format such as
 "id": required|number|max_length[13]|min_length[13]
 ```
 
-###Avaliable Format
+### Avaliable Format
 
 ```
 required
