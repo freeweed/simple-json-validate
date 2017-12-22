@@ -1,6 +1,9 @@
 # SIMPLE-JSON-VALIDATE
 
-tool for check json input and set json data
+tool for check json input and set json data. 
+```
+NOTE: This is fucking beta version.
+```
 
 ## Getting Started
 
