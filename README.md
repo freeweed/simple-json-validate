@@ -98,7 +98,7 @@ set data that can be accepted (replace [...] with accepted data such as avaliabl
 ```
 limit[...]
 ```
-what ever input data will set 
+what ever input data will set to limit data (replace [...] with limit data such as limit[100])
 
 ```
 max_length[...]
