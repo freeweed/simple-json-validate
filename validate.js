@@ -14,7 +14,10 @@ class validate{
         if(this.paramConfig){
             if(this.paramConfig.hasOwnProperty(paramName)){// check is that have property
                 try{
-                    if(typeof params === "object" && params !== null){//the params is object
+                    if(typeof params === "object"){//the params is object
+                        if(params == null){
+                            params = {};
+                        }
                         checkResult = params;
                         checkResult.error = [];
                         for(var checkConfig in this.paramConfig[paramName]){//loop around setting
@@ -109,7 +112,6 @@ class validate{
                         }           
                     }else{
                         checkResult.status = false;
-                        checkResult.error = ["empty input"];
                     }
                 }catch(e){
                     throw "Please Check Your Pattern Or Your Input";
