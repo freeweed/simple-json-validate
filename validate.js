@@ -27,19 +27,19 @@ class validate{
                                     if(condition[i].match(/(number)/g)){
                                         checkResult.isValid = this.stringJob.isNumber(params[checkConfig]); 
                                         if(!checkResult.isValid){
-                                            checkResult.error[checkConfig] = paramConfig[paramName][checkConfig];
+                                            checkResult.error[checkConfig] = this.paramConfig[paramName][checkConfig];
                                         }
                                     }else if(condition[i].indexOf('_length') >= 0){
                                         let num = this.stringJob.stringToNumber(condition[i]);
                                         if(condition[i].indexOf('max_length') >= 0){
                                             if(params[checkConfig].length > num){
                                                 checkResult.isValid = false;
-                                                checkResult.error[checkConfig] = paramConfig[paramName][checkConfig];
+                                                checkResult.error[checkConfig] = this.paramConfig[paramName][checkConfig];
                                             }
                                         }else if(condition[i].indexOf('min_length') >= 0){
                                             if(params[checkConfig].length < num){
                                                 checkResult.isValid = false;
-                                                checkResult.error[checkConfig] = paramConfig[paramName][checkConfig];
+                                                checkResult.error[checkConfig] = this.paramConfig[paramName][checkConfig];
                                             }
                                         }
                                     }else if(condition[i].indexOf('_value') >= 0){
@@ -63,14 +63,14 @@ class validate{
                                     }else if(condition[i].indexOf('email') >= 0){
                                         checkResult.isValid = this.stringJob.isEmail(params[checkConfig]);
                                         if(!checkResult.isValid){
-                                            checkResult.error[checkConfig] = paramConfig[paramName][checkConfig];
+                                            checkResult.error[checkConfig] = this.paramConfig[paramName][checkConfig];
                                         }
                                     }
                                 }
                             }else{
                                 if(this.paramConfig[paramName][checkConfig].indexOf('required') >= 0){
                                     checkResult.isValid = false;
-                                    checkResult.error[checkConfig] = paramConfig[paramName][checkConfig];
+                                    checkResult.error[checkConfig] = this.paramConfig[paramName][checkConfig];
                                 }
                             }
 
@@ -89,7 +89,7 @@ class validate{
                                 }
                                 if(!pass){
                                     checkResult.isValid = false;
-                                    checkResult.error[checkConfig] = paramConfig[paramName][checkConfig];
+                                    checkResult.error[checkConfig] = this.paramConfig[paramName][checkConfig];
                                 }
                             }
                             if( this.paramConfig[paramName][checkConfig].indexOf('limit') >= 0){
@@ -109,6 +109,7 @@ class validate{
                         checkResult.isValid = false;
                     }
                 }catch(e){
+                    console.log(e);
                     throw "Please Check Your Pattern Or Your Input";
                 }
             }else{

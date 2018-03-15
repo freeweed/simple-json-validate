@@ -137,6 +137,15 @@ freeweed
 This project is licensed under the WTFPL License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Changelog 
+### [1.0.3]
+#### Fixed 
+ - some stupid bug
 ### [1.0.2]
 #### Fixed 
  - validate number bug
+
+ ## TODO
+ - add nested child validate
+ - add unit test
+ - improve performance
+ - add more type
