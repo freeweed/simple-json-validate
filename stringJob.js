@@ -7,7 +7,7 @@ class stringJob {
     }
 
     isNumber(input){
-        return (/\d/g).test(input);
+        return (/^\d+$/g).test(input);
     }
     
     isStringfunction(input){

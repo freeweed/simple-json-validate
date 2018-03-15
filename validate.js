@@ -7,9 +7,9 @@ class validate{
         this.stringJob = new stringJob();
     }
 
-    check(paramName = "", params = null){
+    check(paramName = "", params = null, returnObj = true){
         let checkResult = {
-            error: []
+            error: {}
         };
         if(this.paramConfig){
             if(this.paramConfig.hasOwnProperty(paramName)){// check is that have property
@@ -23,23 +23,23 @@ class validate{
                         for(var checkConfig in this.paramConfig[paramName]){//loop around setting
                             if(params.hasOwnProperty(checkConfig) && params[checkConfig]){//if params have config && param have value
                                 let condition = this.paramConfig[paramName][checkConfig].split('|');
-                                for(var i=0;i<condition.length;i++){
+                                for(let i=0, loop = condition.length;i<loop;i++){
                                     if(condition[i].match(/(number)/g)){
                                         checkResult.isValid = this.stringJob.isNumber(params[checkConfig]); 
                                         if(!checkResult.isValid){
-                                            checkResult.error.push(checkConfig + ": " + this.paramConfig[paramName][checkConfig]);
+                                            checkResult.error[checkConfig] = paramConfig[paramName][checkConfig];
                                         }
                                     }else if(condition[i].indexOf('_length') >= 0){
                                         let num = this.stringJob.stringToNumber(condition[i]);
                                         if(condition[i].indexOf('max_length') >= 0){
                                             if(params[checkConfig].length > num){
                                                 checkResult.isValid = false;
-                                                checkResult.error.push(checkConfig + ": " + this.paramConfig[paramName][checkConfig]);
+                                                checkResult.error[checkConfig] = paramConfig[paramName][checkConfig];
                                             }
                                         }else if(condition[i].indexOf('min_length') >= 0){
                                             if(params[checkConfig].length < num){
                                                 checkResult.isValid = false;
-                                                checkResult.error.push(checkConfig + ": " + this.paramConfig[paramName][checkConfig]);
+                                                checkResult.error[checkConfig] = paramConfig[paramName][checkConfig];
                                             }
                                         }
                                     }else if(condition[i].indexOf('_value') >= 0){
@@ -63,14 +63,14 @@ class validate{
                                     }else if(condition[i].indexOf('email') >= 0){
                                         checkResult.isValid = this.stringJob.isEmail(params[checkConfig]);
                                         if(!checkResult.isValid){
-                                            checkResult.error.push(checkConfig + ": " + this.paramConfig[paramName][checkConfig]);
+                                            checkResult.error[checkConfig] = paramConfig[paramName][checkConfig];
                                         }
                                     }
                                 }
                             }else{
                                 if(this.paramConfig[paramName][checkConfig].indexOf('required') >= 0){
                                     checkResult.isValid = false;
-                                    checkResult.error.push(checkConfig + ": " + this.paramConfig[paramName][checkConfig]);
+                                    checkResult.error[checkConfig] = paramConfig[paramName][checkConfig];
                                 }
                             }
 
@@ -79,24 +79,24 @@ class validate{
                                     checkResult[checkConfig] = this.stringJob.extractNum(this.paramConfig[paramName][checkConfig], 'default');
                                 }
                             }
-                            if(this.paramConfig[paramName][checkConfig].indexOf('avaliable') >= 0){
+                            if(this.paramConfig[paramName][checkConfig].indexOf('avaliable') >= 0 && params[checkConfig]){
                                 let avaliableData = this.stringJob.extractMiddle(this.paramConfig[paramName][checkConfig], 'avaliable').split(',');
                                 let pass = false;
-                                for(var i=0;i<avaliableData.length;i++){
+                                for(let i=0,loop = avaliableData.length;i<loop;i++){
                                     if(avaliableData[i] === params[checkConfig]){
                                         pass = true;
                                     }
                                 }
                                 if(!pass){
                                     checkResult.isValid = false;
-                                    checkResult.error.push(checkConfig + ": " + this.paramConfig[paramName][checkConfig]);
+                                    checkResult.error[checkConfig] = paramConfig[paramName][checkConfig];
                                 }
                             }
                             if( this.paramConfig[paramName][checkConfig].indexOf('limit') >= 0){
                                 if(!checkResult.isValid){
                                     checkResult.isValid = true;
-                                    if(checkResult.error){
-                                        delete checkResult.error;
+                                    if(checkResult.error[checkConfig]){
+                                        delete checkResult.error[checkConfig];
                                     }
                                 }
                                 let limit = checkResult[checkConfig] = this.stringJob.extractNum(this.paramConfig[paramName][checkConfig], 'limit');
@@ -104,14 +104,9 @@ class validate{
                                     checkResult[checkConfig] = limit
                                 }
                             }
-                            if(checkResult.error.length > 0){
-                                checkResult.isValid = false;
-                            }else{
-                                checkResult.isValid = true;
-                            }
                         }           
                     }else{
-                        checkResult.status = false;
+                        checkResult.isValid = false;
                     }
                 }catch(e){
                     throw "Please Check Your Pattern Or Your Input";
@@ -122,10 +117,15 @@ class validate{
         }else{
             throw "Please Set Json Pattern"
         }
-        if(checkResult.error.length == 0){
+        if(Object.keys(checkResult.error).length === 0){
+            checkResult.isValid = true;
             delete checkResult.error;
+        }else{
+            checkResult.isValid = false;
         }
-        return checkResult;
+        if(returnObj){
+            return checkResult;
+        }
     }
 
 }

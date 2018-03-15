@@ -2,7 +2,7 @@
 
 tool for check json input and set json data. 
 ```
-NOTE: This is fucking beta version.
+NOTE: This still beta version. Feel free to report bug thank!
 ```
 
 ## Getting Started
@@ -135,3 +135,8 @@ freeweed
 
 ## License
 This project is licensed under the WTFPL License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Changelog 
+### [1.0.2]
+#### Fixed 
+ - validate number bug
