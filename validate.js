@@ -19,7 +19,7 @@ class validate{
                             params = {};
                         }
                         checkResult = params;
-                        checkResult.error = [];
+                        checkResult.error = {};
                         for(var checkConfig in this.paramConfig[paramName]){//loop around setting
                             if(params.hasOwnProperty(checkConfig) && params[checkConfig]){//if params have config && param have value
                                 let condition = this.paramConfig[paramName][checkConfig].split('|');
